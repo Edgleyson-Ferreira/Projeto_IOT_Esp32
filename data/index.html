@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+
+<script language="javascript" type="text/javascript">
+  let url = "ws://192.168.4.1:1337/";
+  let context;
+
+  // This is called when the page finishes loading
+  function init() {
+    // Connect to WebSocket server
+    wsConnect(url);
+    get_status_sensor();
+  }
+
+  function get_status_sensor() {
+    setInterval(function () {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("distance").innerHTML = this.responseText;
+        }
+      };
+      //remover localhost para o esp32
+      xhttp.open("GET", "/distance", true);
+      xhttp.send();
+    }, 1000);
+
+    setInterval(function () {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("status").innerHTML = this.responseText;
+          const statusIcon = this.responseText;
+          const circleIcon = document.querySelector("#led");
+          if (statusIcon === "Livre!") {
+            circleIcon.style.backgroundColor = "#51e151";
+          } else if (statusIcon === "Ocupada!") {
+            circleIcon.style.backgroundColor = "#e15151";
+          } else {
+            circleIcon.style.backgroundColor = "#393e71";
+          }
+        }
+      };
+      //remover localhost para o esp32
+      xhttp.open("GET", "/status", true);
+      xhttp.send();
+    }, 1000);
+  }
+
+  // Call this to connect to the WebSocket server
+  function wsConnect(url) {
+    // Connect to WebSocket server
+    websocket = new WebSocket(url);
+
+    // Assign callbacks
+    websocket.onopen = function (evt) {
+      onOpen(evt);
+    };
+    websocket.onclose = function (evt) {
+      onClose(evt);
+    };
+    websocket.onmessage = function (evt) {
+      onMessage(evt);
+    };
+    websocket.onerror = function (evt) {
+      onError(evt);
+    };
+  }
+
+  // Called when a WebSocket connection is established with the server
+  function onOpen(evt) {
+    // Log connection state
+    console.log("Connected");
+  }
+
+  // Called when the WebSocket connection is closed
+  function onClose(evt) {
+    // Log disconnection state
+    console.log("Disconnected");
+
+    // Try to reconnect after a few seconds
+    setTimeout(function () {
+      wsConnect(url);
+    }, 2000);
+  }
+
+  // Called when a message is received from the server
+  function onMessage(evt) {
+    // Print out our received message
+    console.log("Received: " + evt.data);
+  }
+
+  // Called when a WebSocket error occurs
+  function onError(evt) {
+    console.log("ERROR: " + evt.data);
+  }
+
+  // Sends a message to the server (and prints it to the console)
+  function doSend(message) {
+    console.log("Sending: " + message);
+    websocket.send(message);
+  }
+
+  // Call the init function as soon as the page loads
+  window.addEventListener("load", init, false);
+</script>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <body>
+    <div class="menu-bar">
+      <nav>
+        <img src="./iot.png" alt="Logo do site" class="logo" />
+        <h1>IOT & Urbanismo</h1>
+      </nav>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Estacionamento Inteligente</h2>
+      </div>
+      <div class="card-body">
+        <div class="card-content">
+          <div id="led"></div>
+          <div class="card-item">
+            <div>
+              <span id="status" class="value">--</span>
+            </div>
+            <div>
+              <span class="dht-labels">Vaga</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <footer>
+    <ul class="partners">
+      <li >
+        <a href="#"><img class="logo-partners" src="./iot.png" alt="Logo do site" class="logo" /></a>
+      </li>
+      <li class="logo-partners">
+        <a href="#"><img class="logo-partners" src="./upe.png" alt="Logo do site" class="logo" /></a>
+      </li>
+      <li class="logo-partners">
+        <a href="#"
+          ><img class="logo-partners" src="./facepe.png" alt="Logo do site" class="logo"
+        /></a>
+      </li>
+    </ul>
+  </footer>
+</head>

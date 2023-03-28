@@ -1,0 +1,288 @@
+html {
+  font-family: Arial;
+  display: inline-block;
+  margin: 0px auto;
+  padding: 0px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #f8f7f7;
+}
+
+/* Estilo do título do site */
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: #fff;
+  margin-left: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 3rem;
+}
+
+/* Estilo dos links */
+ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+li {
+  margin: 0 10px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.menu-bar a:hover {
+  text-decoration: underline;
+}
+
+nav {
+  background: #515fe2;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.value {
+  color: #515fe2;
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+  margin: 20px;
+  height: 70vh;
+}
+
+/* Estilo do cabeçalho do card */
+.card-header {
+  background-color: #fefefe;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+  padding: 16px;
+}
+
+/* Estilo do título do card */
+.card-title {
+  color: #ff6f96;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilo do conteúdo do card */
+.card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 16px;
+  margin-top: 3rem; 
+}
+
+.card-item {
+  background-color: #f7f8fc;
+  border-radius: 2rem;
+  margin: 0 0 0 2rem;
+  padding: 2rem;
+  width: 350px;
+}
+
+.units {
+  color: #abb2f0;
+  font-size: 3rem;
+}
+
+.dht-labels {
+  color: #abb2f0;
+  font-size: 1.5rem;
+  padding-bottom: 15px;
+}
+
+#car {
+  font-size: 6rem;
+  color: #515fe2;
+}
+
+#led {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+  background-color: #393e71;
+}
+
+.partners {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logo-partners {
+  height: 60px;
+}
+
+.partners li {
+  margin: 0 50px; /* Define a margem entre as logos */
+}
+
+/* Logo do site */
+.logo {
+  width: 50px;
+  margin-left: 10px;
+}
+
+footer {
+  background-color: #515fe2;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Define a altura do footer */
+  background-color: #d4d9ff;
+}
+
+@media (max-width: 768px) {
+  .card-title {
+    font-size: 1.5rem;
+  }
+  .card-item {
+    width: 300px;
+    margin: 0.8rem 1.6rem;
+  }
+  .units {
+    font-size: 2rem;
+  }
+  .dht-labels {
+    font-size: 1.2rem;
+  }
+  .value {
+    font-size: 3rem;
+  }
+  #car {
+    font-size: 3rem;
+  }
+  #led {
+    width: 5.25rem;
+    height: 5.25rem;
+  }
+  .logo-partners {
+    height: 50px;
+  }
+  .partners li {
+    margin: 0 25px; /* Define a margem entre as logos */
+  }
+}
+
+@media (max-width: 587px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    margin-bottom: 1rem;
+  }
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin: 10px;
+    padding: 0;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-item {
+    width: 150px;
+    margin: 0.4rem 0.8rem;
+  }
+  .units {
+    font-size: 1.5rem;
+  }
+  .dht-labels {
+    font-size: 0.7rem;
+  }
+  .value {
+    font-size: 2.1rem;
+  }
+  #car {
+    font-size: 2rem;
+  }
+  #led {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+  .logo-partners {
+    height: 30px;
+  }
+  .partners li {
+    margin: 0 20px; /* Define a margem entre as logos */
+  }
+}
+@media (max-width: 400px) {
+  .card-title {
+    font-size: 0.7rem;
+  }
+  .card-item {
+    width: 100px;
+    margin: 0.2rem 0.4rem;
+  }
+  .units {
+    font-size: 1rem;
+  }
+  .dht-labels {
+    font-size: 0.5rem;
+  }
+  .value {
+    font-size: 1.5rem;
+  }
+  #car {
+    font-size: 1.5rem;
+  }
+  #led {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  .partners li {
+    margin: 0 10px; /* Define a margem entre as logos */
+  }
+}
