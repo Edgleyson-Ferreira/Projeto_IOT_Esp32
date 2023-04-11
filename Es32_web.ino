@@ -10,8 +10,8 @@ HCSR04 hc(15, 2); //initialisation class HCSR04 (trig pin , echo pin)
 // NewPing setup of pins and maximum distance. 
 
 // Constantes
-const char *ssid = "Asus Casa";
-const char *password = "12345678";
+const char *ssid ="Marcelo Casa "  ; // COLOCAR UM ESPAÇO APÓS INSERIR O SSID 
+const char *password = "1710rosa";
 const char *msg_get_led = "getLEDState";
 const int dns_port = 53;
 const int http_port = 80;
@@ -113,15 +113,7 @@ void setup() {
     Serial.println("Error mounting SPIFFS");
     while(1);
   }
-   // Connect to Wi-Fi
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Connecting to WiFi..");
-  }
-
-  // Print ESP32 Local IP Address
-  Serial.println(WiFi.localIP());
+  conecta_wifi();
 
   // On HTTP request for root, provide index.html file
   server.on("/facepe.png", HTTP_GET, facepe);
@@ -151,6 +143,18 @@ void setup() {
   server.begin();
 }
 
+void conecta_wifi(){
+   // Connect to Wi-Fi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi..");
+  }
+
+  // Print ESP32 Local IP Address
+  Serial.println(WiFi.localIP());
+}
+
 void loop() {
   
   // Look for and handle WebSocket data
@@ -158,6 +162,11 @@ void loop() {
    distance = duration * (0.0343) / 2;// calcula a distância de sentido único percorrida pelo pulso
    get_vaga_status();
    get_status_string();
+   if(WiFi.status() != WL_CONNECTED){
+    Serial.println("Wifi desconectou. Reconectando novamente");
+    conecta_wifi();
+   }
+   
 }
 void time_Measurement()
 { //função para medir o tempo que o pulso leva para retornar
